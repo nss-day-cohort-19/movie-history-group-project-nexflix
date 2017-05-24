@@ -35,5 +35,8 @@ $(document).on('click', '.find-new-movie', () => {
 	mdb.searchMDB(movieName)
 	.then((value) => {
     	console.log('Input value is', movieName);
+
 	});
+	$('.form-control').val('');
+
 });
