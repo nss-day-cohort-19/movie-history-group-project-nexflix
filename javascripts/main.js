@@ -24,3 +24,4 @@ $("#logout").click(function() {
     $("#loggedInNav").addClass("hide");
     $("#watchedButtons").addClass("hide");
 });
+
