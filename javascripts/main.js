@@ -8,6 +8,35 @@ let movieDB= require("./mdb-config");
 let comboObj = {
 	movies: []
 };
+
+// Star Rating Plugin Settings
+$(".rating").rating({stars:10, min:1, max:10, step:1, size:'xs',
+    starCaptions:{
+    1: '1',
+    2: '2',
+    3: '3',
+    4: '4',
+    5: '5',
+    6: '6',
+    7: '7',
+    8: '8',
+    9: '9',
+    10: '10'
+}});
+console.log("Main.JS has loaded2");
+
+
+
+
+
+
+//Popup for immediate user login on page load
+user.logInGoogle()
+  	.then(function(result) {
+    	console.log("result from Login", result.user.uid);
+    	user.setUser(result.user.uid);
+    });
+
 // Handlebars helper that works with bootstrap grid system to form rows between every 3 items.
 Handlebars.registerHelper('grouped_each', function(every, context, options) {
     var out = "", subcontext = [], i;
@@ -25,24 +54,24 @@ Handlebars.registerHelper('grouped_each', function(every, context, options) {
 });
 // Popular movies loaders.
 
-
+// WE DON'T NEED THIS RIGHT NOW
 let loadPopularMovies = () => {
-	mdb.getPopular().
-	then(function(songData){
-		console.log("popular", songData);
-		songData.forEach(function(element){
-			var newObj = buildNewObj(element);
-			mdb.getCredits(element.id)
-			.then(function(actors){
-				// console.log("actors", actors);
-				newObj.cast = actors;
-				comboObj.movies.push(newObj);
-				// console.log("comboObj", comboObj);
-				$("#outputArea").html(moviesTemplate(comboObj));
+	// mdb.getPopular().
+	// then(function(songData){
+	// 	console.log("popular", songData);
+	// 	songData.forEach(function(element){
+	// 		var newObj = buildNewObj(element);
+	// 		mdb.getCredits(element.id)
+	// 		.then(function(actors){
+	// 			// console.log("actors", actors);
+	// 			newObj.cast = actors;
+	// 			comboObj.movies.push(newObj);
+	// 			// console.log("comboObj", comboObj);
+	// 			$("#outputArea").html(moviesTemplate(comboObj));
 
-			});
-		});
-	});
+	// 		});
+	// 	});
+	// });
 };
 loadPopularMovies();
 
@@ -62,9 +91,9 @@ $("#register-login").click(function() {
     console.log("result from Login", result.user.uid);
     user.setUser(result.user.uid);
     // loadMoviesToDom();
-    $("#splashNav").addClass("hide");
-    $("#loggedInNav").removeClass("hide");
-    $("#watchedButtons").removeClass("hide");
+    // $("#splashNav").addClass("hide");
+    // $("#loggedInNav").removeClass("hide");
+    // $("#watchedButtons").removeClass("hide");
   });
 });
 
@@ -73,6 +102,7 @@ $("#logout").click(function() {
     console.log("logout clicked");
     user.logOut();
     $("#splashNav").removeClass("hide");
+    $("#noUser").removeClass("hide");
     $("#loggedInNav").addClass("hide");
     $("#watchedButtons").addClass("hide");
 });
@@ -94,15 +124,15 @@ $("#watched").click(function() {
     $("#breadcrumb").append(`<li class="search-results">Watched</li>`);
 });
 
-//user clicks favorites search filter and breadcrumbs appear
-$("#favorites").click(function() {
-    $("#breadcrumb").html(`<li class="search-results">Search Results</li>`);
-    $("#breadcrumb").append(`<li class="search-results">Favorites</li>`);
-});
+// //user clicks favorites search filter and breadcrumbs appear
+// $("#favorites").click(function() {
+//     $("#breadcrumb").html(`<li class="search-results">Search Results</li>`);
+//     $("#breadcrumb").append(`<li class="search-results">Favorites</li>`);
+// });
 
 // Get input value and pass it to .. searchMBD
 $(document).on('click', '#untracked', () => {
-	let inputValue = $('.form-control').val();
+	let inputValue = $('#search').val();
 	let movieName = inputValue.replace(/ /gi, '+');
 	$("#outputArea").html(null);
 	comboObj = {
@@ -126,14 +156,45 @@ $(document).on('click', '#untracked', () => {
 	});
 });
 
+// Press ENTER in Search Bar to search Untracked Movies
+$(".form-control").keypress(function(key){
+	if(key.which == 13){
+		let inputValue = $('#search').val();
+		let movieName = inputValue.replace(/ /gi, '+');
+		$("#outputArea").html(null);
+		comboObj = {
+			movies: []
+		};
+	    	console.log('Input value is', inputValue);
+		mdb.searchMDB(movieName)
+		.then((value) => {
+	    	value.forEach(function(element){
+	    		console.log("WHY THEY USE VALUE", value);
+				var newObj = buildNewObj(element);
+				mdb.getCredits(element.id)
+				.then(function(actors){
+					// console.log("actors", actors);
+					newObj.cast = actors;
+					comboObj.movies.push(newObj);
+					// console.log("comboObj", comboObj);
+					$("#outputArea").html(moviesTemplate(comboObj));
+				});
+				console.log("comboObj", comboObj);
+			});
+		});
+	}
+});
+
 //Build New Object
 let buildNewObj = (element) => {
 	let newObj = {
 		movie: `${element.title}`,
 		year: `${element.year}`,
 		id: `${element.id}`,
-		poster: `${movieDB.getMDBsettings().posterURL}${element.poster_path}`,
 		mdb: `${element.mdb}`
 	};
+	if(element.poster_path){
+		newObj.poster = `${movieDB.getMDBsettings().posterURL}${element.poster_path}`;
+	}
 	return newObj;
 };

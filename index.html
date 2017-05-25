@@ -6,11 +6,19 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="lib/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet"> -->
+    <link href="lib/node_modules/bootstrap-star-rating/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 
+<body>
+<h1> TEST THIS</h1>
+<input name="test"><br>
+<input id="rating-test-id" name="input-name" type="number" class="rating"><br>
+<input id="rating-test-id5" name="input-name" type="number" class="rating">
+<h1>TEST 2</h1>
 
 <!-- ********* Splash Page Navbar-->
-    <div id="splashNav" class="hide">
+    <div id="splashNav" class="">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,7 +45,7 @@
     </div>
     <!-- ******************* -->
     <!-- ********* Navbar after user has logged in-->
-    <div id="loggedInNav" class="">
+    <div id="loggedInNav" class="hide">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -52,7 +60,7 @@
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input id="search" type="text" class="form-control" placeholder="Search">
                         </div>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
@@ -79,8 +87,14 @@
             <li><button id="untracked" type="button" class="btn btn-default">Show Untracked Movies</button></li>
             <li><button id="unwatched" type="button" class="btn btn-default">Show Unwatched Movies</button></li>
             <li><button id="watched" type="button" class="btn btn-default">Show Watched</button></li>
-            <li><button id="favorites" type="button" class="btn btn-default">Favorites</button></li>
+            <!-- <li><button id="favorites" type="button" class="btn btn-default">Favorites</button></li> -->
         </ul>
+    </div>
+    <!-- ******************* -->
+
+    <!-- *********Text if no user********** -->
+    <div class="container-fluid" id="noUser">
+        <h1>Please Register/Login</h1>
     </div>
     <!-- ******************* -->
 
@@ -99,6 +113,8 @@
 
     <script type="text/javascript" src="lib/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="lib/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/node_modules/bootstrap-star-rating/js/star-rating.min.js" type="text/javascript"></script>
     <script type='text/javascript' src='dist/app.js'></script>
+
 </body>
 </html>
