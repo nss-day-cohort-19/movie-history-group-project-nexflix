@@ -10,7 +10,7 @@
 
 
 <!-- ********* Splash Page Navbar-->
-    <div id="splashNav" class="hide">
+    <div id="splashNav" class="">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,7 +37,7 @@
     </div>
     <!-- ******************* -->
     <!-- ********* Navbar after user has logged in-->
-    <div id="loggedInNav" class="">
+    <div id="loggedInNav" class="hide">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -50,11 +50,11 @@
                     <ul class="nav navbar-nav">
                         <li><a href="">Search:</a></li>
                     </ul>
-                    <form class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                    <div class="navbar-left">
+                        <div>
+                            <input id="search" type="text" placeholder="Search">
                         </div>
-                    </form>
+                    </div>
                     <ul class="nav navbar-nav navbar-right">
 
                     <li><a id="logout">Logout</a></li>
@@ -79,8 +79,14 @@
             <li><button id="untracked" type="button" class="btn btn-default">Show Untracked Movies</button></li>
             <li><button id="unwatched" type="button" class="btn btn-default">Show Unwatched Movies</button></li>
             <li><button id="watched" type="button" class="btn btn-default">Show Watched</button></li>
-            <li><button id="favorites" type="button" class="btn btn-default">Favorites</button></li>
+            <!-- <li><button id="favorites" type="button" class="btn btn-default">Favorites</button></li> -->
         </ul>
+    </div>
+    <!-- ******************* -->
+
+    <!-- *********Text if no user********** -->
+    <div class="container-fluid" id="noUser">
+        <h1>Please Register/Login</h1>
     </div>
     <!-- ******************* -->
 

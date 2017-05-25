@@ -30,10 +30,11 @@ $(".watched").click(function() {
     fb.getUnwatchedMovies();
 });
 
-//user clicks show favorite movies
-$(".favorite").click(function() {
-    fb.getUnwatchedMovies();
-});
+// //user clicks show favorite movies
+// $(".favorite").click(function() {
+//     fb.getUnwatchedMovies();
+// });
+
 
 $(document).on("click", ".addToWatchlist", function(event){
     console.log('event', event);
@@ -60,4 +61,6 @@ $(document).on("click", ".addToWatchlist", function(event){
         user: userName
     };
     console.log(addToWatchlistObj);
+
+    // SOMEWHERE IN HERE IS WHERE FB.ADDMOVIES GETS CALLED
 });
