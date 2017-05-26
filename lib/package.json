@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "bootstrap": "^3.3.7",
+    "bootstrap-slider": "^9.8.0",
     "browserify": "^13.1.1",
     "grunt": "^1.0.1",
     "grunt-browserify": "^5.0.0",
